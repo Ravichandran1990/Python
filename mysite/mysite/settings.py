@@ -27,6 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#custom User Model
+AUTH_USER_MODEL = "register.Register"
+
+#configuration
+JWT_CONF = {
+    'TOKEN_LIFETIME_HOURS': 5
+}
 
 # Application definition
 
@@ -38,6 +45,8 @@ INSTALLED_APPS = [
     'actor',
     'film',
     'org',
+    'register',
+    'jwt',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +54,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+# REST FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'register.authentication.JWTAuthentication',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
